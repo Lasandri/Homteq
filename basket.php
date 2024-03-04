@@ -36,7 +36,7 @@ echo "<h4>".$pagename."</h4>";                                                  
     if(isset($_SESSION['basket'])){
         echo '<table>';
         echo "<tr><th>Product Name</th><th>Price</th><th>Quantity</th><th>Subtotal</th></tr>";
-        echo "</table>";
+        
 
         foreach ($_SESSION['basket'] as $index => $value) {
             
@@ -49,20 +49,19 @@ echo "<h4>".$pagename."</h4>";                                                  
             echo "<tr>";
             echo "<td>".$arrayp['prodName']."</td>";
             echo "<td>".$arrayp['prodPrice']."</td>";
-            echo "<td class = 'baskettable'>".$value."</td>";
+            echo "<td class = 'baskettable'>".$value."</td>";  
+             $subtotal = $arrayp['prodPrice'] * $value; 
+            echo "<td '>".$subtotal."</td>";
+
             echo "</tr>";
 
-            echo "<tr>";            
-            $subtotal = $arrayp['prodPrice'] * $value;
-
-            echo "<td colspan='3'>".$subtotal."</td>";
-            $total += $subtotal;
-            echo "</tr>";
-        }
-    } else {
-        // Display empty basket message
-        echo "<p>Your basket is empty</p>";
-    }
+            $total=$total+$subtotal;}}//else display empty basket message
+            else
+            {echo "<p>Empty basket";}// Display total
+            echo "<tr>";
+            echo "<td colspan=3>TOTAL</td>";
+            echo "<td>&pound".number_format($total,2)."</td>";
+            echo "</tr>";echo "</table>";
 
 
 include("footfile.html");                                                           //include head layout
